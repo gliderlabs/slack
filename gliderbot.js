@@ -1,3 +1,6 @@
+// edit this file at https://github.com/gliderlabs/slack
+// changes will be live immediately.
+
 slack.on("slashCommand", function(cmd) {
 	cmd.on("say hello")
 		.description("says hello")
