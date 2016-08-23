@@ -1,11 +1,11 @@
 slack.on("slashCommand", function(cmd) {
-	cmd.on("hello")
+	cmd.on("say hello")
 		.description("says hello")
 		.action(function(params) {
-			cmd.publicReply("hello yourself");
+			cmd.publicReply("hello");
 		});
 
-	cmd.on("goodbye")
+	cmd.on("say goodbye")
 		.description("says goodbye")
 		.action(function(params) {
 			cmd.publicReply("goodbye, "+cmd.userName);
