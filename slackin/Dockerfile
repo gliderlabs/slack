@@ -1,4 +1,5 @@
-FROM octohost/nodejs
+FROM alpine:3.4
+RUN apk add --update nodejs
 
 ENV PORT 3000
 
