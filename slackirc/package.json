@@ -1,0 +1,9 @@
+{
+    "name": "slack-irc",
+    "version": "1.0.0",
+    "author": "Matt Aitchison <Matt@lanciv.com>",
+    "license": "MIT",
+    "dependencies": {
+        "slack-irc": "^3.8.7"
+    }
+}

@@ -1,7 +1,10 @@
 .PHONY: build deploy
 
 build:
-	convox build
+	docker build -t gliderlabs/slack-irc .
 
+push:
+	docker push gliderlabs/slack-irc
+	
 deploy:
-	convox deploy --wait
+	kubectl apply --namespace gliderlabs -f slack-irc.yaml

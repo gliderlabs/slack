@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: slack-irc
+data:
+  config.js: |-
+    module.exports = {
+      nickname: "gliderbot",
+      server: "irc.freenode.net",
+      token: process.env.SLACK_TOKEN,
+      channelMapping: {
+        "#irc": "#gliderlabs",
+        "#dokku": "#dokku"
+      }
+    };
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: slack-irc
+spec:
+  revisionHistoryLimit: 4
+  progressDeadlineSeconds: 90
+  template:
+    metadata:
+      labels:
+        app: slack-irc
+    spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            name: slack-irc
+      containers:
+        - name: slack-irc
+          image: gliderlabs/slack-irc
+          args: ["--config", "/config/config.js"]
+          volumeMounts:
+            - mountPath: /config
+              name: config-volume
+          env:
+            - name: SLACK_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: slack-irc
+                  key: slack-token
